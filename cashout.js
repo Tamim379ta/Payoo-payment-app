@@ -1,38 +1,44 @@
 document.getElementById('withdraw-btn')
 .addEventListener('click', function(){
 
-  const cashOutInput = document.getElementById('cashout-number');
-  const cashOutNumber = cashOutInput.value;
+  const cashOutNumber = getValueFromInput('cashout-number');
   if (cashOutNumber.length != 11){
     return alert("Invalid Number");
   }
 
-  const amountInput = document.getElementById('amount-number');
-  const amountNumber = amountInput.value;
+  const amountNumber = getValueFromInput('amount-number');
 
-  const balanceNumber =  document.getElementById('balance');
-  const balance = balanceNumber.innerText;
+  const currBalance = getBalance();
 
-  const newBalance = Number(balance) - Number(amountNumber)
+  const newBalance = currBalance - Number(amountNumber)
 
   if( newBalance < 0) {
     return alert("Invalid Balance")
   }
 
-  const cashoutPin = document.getElementById('cashout-pin');
-  const pin = cashoutPin.value;
+  const cashoutPin = getValueFromInput('cashout-pin')
 
-  if(pin === '1234'){
+  if(cashoutPin === '1234'){
 
-    balanceNumber.innerText = newBalance;
+    alert(`Cash Out Success 
+      Amount ${amountNumber}
+      at ${Date()}`)
+    setBalance(newBalance);
+
+   const history = document.getElementById('history-container');
+   const newHistory = document.createElement('div')
+   newHistory.innerHTML = `
+    <div class="transaction-card p-5 bg-base-100">
+    Cash Out Success
+    Amount ${amountNumber}
+    To ${cashOutNumber}
+    at ${Date()}
+    </div>
+    `
+    history.append(newHistory);
 
   }else{
     return alert("Invalid Pin")
   }
-
-
-
-
-
 
 })
