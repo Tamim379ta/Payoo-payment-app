@@ -9,7 +9,7 @@ document.getElementById('login-btn')
   if(number === "11111111111" && pin === "1234"){
     alert('Login Success');
 
-    window.location.assign('/home.html')
+    window.location.assign('./home.html')
   }
   else{
     alert('Login Failed')
